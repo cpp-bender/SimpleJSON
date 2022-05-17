@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class LoadSuccessLog : BaseLogger
+namespace SimpleJSON.Log
 {
-    public LoadSuccessLog() : base()
+    public class LoadSuccessLog : BaseLogger
     {
+        public LoadSuccessLog() : base()
+        {
 
-    }
+        }
 
-    protected override void Log()
-    {
-        Debug.Log("Load success");
+        protected override void Log()
+        {
+            Debug.Log("Load success");
+        }
     }
 }

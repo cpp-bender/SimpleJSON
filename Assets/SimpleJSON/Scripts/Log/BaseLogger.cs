@@ -1,9 +1,12 @@
-public abstract class BaseLogger
+namespace SimpleJSON.Log
 {
-    public BaseLogger()
+    public abstract class BaseLogger
     {
-        Log();
-    }
+        public BaseLogger()
+        {
+            Log();
+        }
 
-    protected abstract void Log();
+        protected abstract void Log();
+    }
 }

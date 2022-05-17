@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class SaveSuccessLog : BaseLogger
+namespace SimpleJSON.Log
 {
-    public SaveSuccessLog() : base()
+    public class SaveSuccessLog : BaseLogger
     {
+        public SaveSuccessLog() : base()
+        {
 
-    }
+        }
 
-    protected override void Log()
-    {
-        Debug.LogError("Files saved");
+        protected override void Log()
+        {
+            Debug.LogError("Files saved");
+        }
     }
 }
