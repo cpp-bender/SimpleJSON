@@ -3,11 +3,9 @@ using System.IO;
 
 public static class SaveManager
 {
-    public const string PLAYERSAVEDATAPATH = "/PlayerSaveFile.json";
-
-    public static void Save<T>(T obj)
+    public static void Save<T>(T obj, string path)
     {
-        string fullPath = Application.persistentDataPath + PLAYERSAVEDATAPATH;
+        string fullPath = Application.persistentDataPath + path;
 
         string json = JsonUtility.ToJson(obj);
 
@@ -36,7 +34,7 @@ public static class SaveManager
 
     public static void Reset<T>(string path, T obj = default(T))
     {
-        string fullPath = Application.persistentDataPath + PLAYERSAVEDATAPATH;
+        string fullPath = Application.persistentDataPath + SavePath.PLAYERSAVEPATH;
 
         string json = JsonUtility.ToJson(obj);
 
