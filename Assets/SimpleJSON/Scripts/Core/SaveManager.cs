@@ -5,7 +5,7 @@ public static class SaveManager
 {
     public const string PLAYERSAVEDATAPATH = "/PlayerSaveFile.json";
 
-    public static bool Save<T>(T obj)
+    public static void Save<T>(T obj)
     {
         string fullPath = Application.persistentDataPath + PLAYERSAVEDATAPATH;
 
@@ -13,9 +13,7 @@ public static class SaveManager
 
         File.WriteAllText(fullPath, json);
 
-        Debug.Log("Saved");
-
-        return true;
+        new SaveSuccessLog();
     }
 
     public static T Load<T>(string path)
@@ -24,11 +22,14 @@ public static class SaveManager
 
         if (!File.Exists(fullPath))
         {
-            Debug.LogError("Path does not exist");
+            new LoadFailLog();
+
             return default(T);
         }
 
         string json = File.ReadAllText(fullPath);
+
+        new LoadSuccessLog();
 
         return JsonUtility.FromJson<T>(json);
     }
@@ -41,6 +42,6 @@ public static class SaveManager
 
         File.WriteAllText(fullPath, json);
 
-        Debug.Log("Reset");
+        new ResetLog();
     }
 }
