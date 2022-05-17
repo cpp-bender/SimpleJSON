@@ -1,45 +1,48 @@
 using UnityEngine;
 using System.IO;
 
-public static class SaveManager
+namespace SimpleJSON
 {
-    public static void Save<T>(T obj, string path)
+    public static class SaveManager
     {
-        string fullPath = Application.persistentDataPath + path;
-
-        string json = JsonUtility.ToJson(obj);
-
-        File.WriteAllText(fullPath, json);
-
-        new SaveSuccessLog();
-    }
-
-    public static T Load<T>(string path)
-    {
-        string fullPath = Application.persistentDataPath + path;
-
-        if (!File.Exists(fullPath))
+        public static void Save<T>(T obj, string path)
         {
-            new LoadFailLog();
+            string fullPath = Application.persistentDataPath + path;
 
-            return default(T);
+            string json = JsonUtility.ToJson(obj);
+
+            File.WriteAllText(fullPath, json);
+
+            new SaveSuccessLog();
         }
 
-        string json = File.ReadAllText(fullPath);
+        public static T Load<T>(string path)
+        {
+            string fullPath = Application.persistentDataPath + path;
 
-        new LoadSuccessLog();
+            if (!File.Exists(fullPath))
+            {
+                new LoadFailLog();
 
-        return JsonUtility.FromJson<T>(json);
-    }
+                return default(T);
+            }
 
-    public static void Reset<T>(string path, T obj = default(T))
-    {
-        string fullPath = Application.persistentDataPath + SavePath.PLAYERSAVEPATH;
+            string json = File.ReadAllText(fullPath);
 
-        string json = JsonUtility.ToJson(obj);
+            new LoadSuccessLog();
 
-        File.WriteAllText(fullPath, json);
+            return JsonUtility.FromJson<T>(json);
+        }
 
-        new ResetLog();
+        public static void Reset<T>(string path, T obj = default(T))
+        {
+            string fullPath = Application.persistentDataPath + SavePath.PLAYERSAVEPATH;
+
+            string json = JsonUtility.ToJson(obj);
+
+            File.WriteAllText(fullPath, json);
+
+            new ResetLog();
+        }
     }
 }

@@ -1,5 +1,8 @@
-public static class SavePath
+namespace SimpleJSON
 {
-    public const string PLAYERSAVEPATH = "/PlayerData.json";
-    public const string GAMESAVEPATH = "/GameData.json";
+    public static class SavePath
+    {
+        public const string PLAYERSAVEPATH = "/PlayerData.json";
+        public const string GAMESAVEPATH = "/GameData.json";
+    }
 }
