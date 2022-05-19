@@ -45,5 +45,23 @@ namespace SimpleJSON
 
             new ResetLog();
         }
+
+        public static int DeleteAll()
+        {
+            var paths = Directory.GetFiles(Application.persistentDataPath);
+
+            int fileCount = 0;
+
+            foreach (var path in paths)
+            {
+                File.Delete(path);
+
+                fileCount++;
+            }
+
+            new DeleteSuccessLog();
+
+            return fileCount;
+        }
     }
 }
