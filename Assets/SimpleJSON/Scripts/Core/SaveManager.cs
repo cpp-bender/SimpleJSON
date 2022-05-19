@@ -8,7 +8,9 @@ namespace SimpleJSON
     {
         public static void Save<T>(T obj, string path) where T : class
         {
-            string fullPath = Application.persistentDataPath + path;
+            TryToCreateBasePath();
+
+            string fullPath = SimplePath.BASEPATH + path;
 
             string json = JsonUtility.ToJson(obj);
 
@@ -19,7 +21,7 @@ namespace SimpleJSON
 
         public static T Load<T>(string path) where T : class
         {
-            string fullPath = Application.persistentDataPath + path;
+            string fullPath = SimplePath.BASEPATH + path;
 
             if (!File.Exists(fullPath))
             {
@@ -37,7 +39,7 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T obj = default(T)) where T : class
         {
-            string fullPath = Application.persistentDataPath + path;
+            string fullPath = SimplePath.BASEPATH + path;
 
             string json = JsonUtility.ToJson(obj);
 
@@ -46,22 +48,12 @@ namespace SimpleJSON
             new ResetLog();
         }
 
-        public static int DeleteAll()
+        private static void TryToCreateBasePath()
         {
-            var paths = Directory.GetFiles(Application.persistentDataPath);
-
-            int fileCount = 0;
-
-            foreach (var path in paths)
+            if (!Directory.Exists(SimplePath.BASEPATH))
             {
-                File.Delete(path);
-
-                fileCount++;
+                Directory.CreateDirectory(SimplePath.BASEPATH);
             }
-
-            new DeleteSuccessLog();
-
-            return fileCount;
         }
     }
 }
