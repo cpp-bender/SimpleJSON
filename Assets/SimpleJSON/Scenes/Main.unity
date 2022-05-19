@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
+  saveData:
+    levelCount: 12
 --- !u!1 &1025310345
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,9 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250e7ba54482b2e488c8e9865da26383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSave:
-    health: 0
-    name: 
 --- !u!4 &1812750794
 Transform:
   m_ObjectHideFlags: 0

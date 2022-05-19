@@ -6,7 +6,7 @@ namespace SimpleJSON
 {
     public static class SaveManager
     {
-        public static void Save<T>(T obj, string path)
+        public static void Save<T>(T obj, string path) where T : class
         {
             string fullPath = Application.persistentDataPath + path;
 
@@ -17,7 +17,7 @@ namespace SimpleJSON
             new SaveSuccessLog();
         }
 
-        public static T Load<T>(string path)
+        public static T Load<T>(string path) where T : class
         {
             string fullPath = Application.persistentDataPath + path;
 
@@ -35,9 +35,9 @@ namespace SimpleJSON
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static void Reset<T>(string path, T obj = default(T))
+        public static void Reset<T>(string path, T obj = default(T)) where T : class
         {
-            string fullPath = Application.persistentDataPath + SavePath.PLAYERSAVEPATH;
+            string fullPath = Application.persistentDataPath + path;
 
             string json = JsonUtility.ToJson(obj);
 

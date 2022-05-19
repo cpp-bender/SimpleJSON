@@ -8,9 +8,16 @@ public class GameManagerEditor : Editor
     {
         DrawDefaultInspector();
 
+        var gameManager = (GameManager)target;
+
         if (GUILayout.Button("Save"))
         {
+            gameManager.SaveData();
+        }
 
+        if (GUILayout.Button("Load"))
+        {
+            gameManager.LoadData();
         }
     }
 }
