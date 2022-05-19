@@ -8,16 +8,22 @@ public class SimpleJsonTests
     {
         var testSaveData = new TestSaveData(10);
 
-        SaveManager.Save(testSaveData, SavePath.GAMESAVEPATH);
+        SaveManager.Save(testSaveData, Paths.GAMESAVEPATH);
 
-        Assert.AreEqual(10, SaveManager.Load<TestSaveData>(SavePath.GAMESAVEPATH).levelCount);
+        Assert.AreEqual(10, SaveManager.Load<TestSaveData>(Paths.GAMESAVEPATH).levelCount);
     }
 
     [Test]
     public void ResetTest()
     {
-        SaveManager.Reset<TestSaveData>(SavePath.GAMESAVEPATH, new TestSaveData(5));
+        SaveManager.Reset<TestSaveData>(Paths.GAMESAVEPATH, new TestSaveData(5));
 
-        Assert.AreEqual(5, SaveManager.Load<TestSaveData>(SavePath.GAMESAVEPATH).levelCount);
+        Assert.AreEqual(5, SaveManager.Load<TestSaveData>(Paths.GAMESAVEPATH).levelCount);
+    }
+
+    [Test]
+    public void DeleteTest()
+    {
+        Assert.AreEqual(0, SaveManager.DeleteAll());
     }
 }
