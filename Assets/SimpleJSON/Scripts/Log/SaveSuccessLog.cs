@@ -11,7 +11,7 @@ namespace SimpleJSON.Log
 
         protected override void Log()
         {
-            Debug.LogError("Files saved");
+            Debug.Log("Files saved");
         }
     }
 }
