@@ -1,15 +1,17 @@
 using UnityEngine;
-using SimpleJSON.Log;
 
-public class DeleteSuccessLog : BaseLogger
+namespace SimpleJSON.Log
 {
-    public DeleteSuccessLog() : base()
+    public class DeleteSuccessLog : BaseLogger
     {
+        public DeleteSuccessLog() : base()
+        {
 
-    }
+        }
 
-    protected override void Log()
-    {
-        Debug.Log("Files deleted");
+        protected override void Log()
+        {
+            Debug.Log("Files deleted");
+        }
     }
 }
