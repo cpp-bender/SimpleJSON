@@ -37,6 +37,8 @@ namespace SimpleJSON
 
         public static T Load<T>(string path) where T : class
         {
+            //TODO: Test this
+
             CreateSaveDir();
 
             string fullPath = GetPath(path);
@@ -50,6 +52,8 @@ namespace SimpleJSON
 
         public static T[] Load<T>(string path, bool empty = false) where T : class
         {
+            //TODO: Test this
+
             CreateSaveDir();
 
             string fullPath = GetPath(path);
@@ -63,6 +67,8 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T obj = default(T)) where T : class
         {
+            //TODO: Test this
+
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(obj);
@@ -76,6 +82,8 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T[] objs = default(T[])) where T : class
         {
+            //TODO: Test this
+
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(new Wrapper<T>(objs));
@@ -107,6 +115,8 @@ namespace SimpleJSON
 
         private static string ReadFile(string path)
         {
+            //TODO: Refactor
+
             string content = "";
 
             if (File.Exists(path))
@@ -116,12 +126,25 @@ namespace SimpleJSON
                     content = reader.ReadToEnd();
                 }
             }
+            else
+            {
+                new ReadFailLog();
+            }
             return content;
         }
 
         private static string GetPath(string fileName)
         {
-            return SimplePath.BASEPATH + "/" + fileName;
+            //TODO: Refactor
+
+            string fullPath = SimplePath.BASEPATH + "/" + fileName;
+
+            if (!File.Exists(fullPath))
+            {
+                File.Create(fullPath);
+                new PathFailLog();
+            }
+            return fullPath;
         }
     }
 }
