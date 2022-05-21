@@ -9,7 +9,7 @@ namespace SimpleJSON
     {
         public static void Save<T>(T obj, string path, bool prettyPrint = true) where T : class
         {
-            CreateBasePath();
+            CreateSaveDir();
 
             string fullPath = GetPath(path);
 
@@ -22,7 +22,7 @@ namespace SimpleJSON
 
         public static void Save<T>(T[] objs, string path, bool prettyPrint = true) where T : class
         {
-            CreateBasePath();
+            CreateSaveDir();
 
             var wrapper = new Wrapper<T>(objs);
 
@@ -37,6 +37,8 @@ namespace SimpleJSON
 
         public static T Load<T>(string path) where T : class
         {
+            CreateSaveDir();
+
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -48,6 +50,8 @@ namespace SimpleJSON
 
         public static T[] Load<T>(string path, bool empty = false) where T : class
         {
+            CreateSaveDir();
+
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -59,6 +63,8 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T obj = default(T)) where T : class
         {
+            CreateSaveDir();
+
             string json = JsonUtility.ToJson(obj);
 
             string fullPath = GetPath(path);
@@ -70,6 +76,8 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T[] objs = default(T[])) where T : class
         {
+            CreateSaveDir();
+
             string json = JsonUtility.ToJson(new Wrapper<T>(objs));
 
             string fullPath = GetPath(path);
@@ -79,7 +87,7 @@ namespace SimpleJSON
             new ResetLog();
         }
 
-        private static void CreateBasePath()
+        private static void CreateSaveDir()
         {
             if (!Directory.Exists(SimplePath.BASEPATH))
             {
