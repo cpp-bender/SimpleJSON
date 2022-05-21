@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SimpleJSON
+namespace SimpleJSON.Util
 {
     public static class SimplePath
     {
