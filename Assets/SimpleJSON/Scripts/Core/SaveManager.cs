@@ -117,10 +117,20 @@ namespace SimpleJSON
             }
         }
 
+        private static string GetPath(string fileName)
+        {
+            string fullPath = BASEDIRECTORY + fileName;
+
+            if (!File.Exists(fullPath))
+            {
+                File.Create(fullPath);
+            }
+
+            return fullPath;
+        }
+
         private static string ReadFile(string path)
         {
-            //TODO: Refactor
-
             string content = "";
 
             if (File.Exists(path))
@@ -130,25 +140,8 @@ namespace SimpleJSON
                     content = reader.ReadToEnd();
                 }
             }
-            else
-            {
-                new ReadFailLog();
-            }
+
             return content;
-        }
-
-        private static string GetPath(string fileName)
-        {
-            //TODO: Refactor
-
-            string fullPath = BASEDIRECTORY + fileName;
-
-            if (!File.Exists(fullPath))
-            {
-                File.Create(fullPath);
-                new PathFailLog();
-            }
-            return fullPath;
         }
     }
 }
