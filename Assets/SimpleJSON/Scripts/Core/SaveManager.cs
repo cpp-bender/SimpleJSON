@@ -52,7 +52,7 @@ namespace SimpleJSON
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static T[] Load<T>(string path, bool empty = false) where T : class
+        public static T[] LoadMultiple<T>(string path) where T : class
         {
             CreateSaveDir();
 
