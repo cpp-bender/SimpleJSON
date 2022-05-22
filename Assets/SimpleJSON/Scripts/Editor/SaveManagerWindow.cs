@@ -2,7 +2,6 @@ using SimpleJSON.Log;
 using UnityEditor;
 using System.IO;
 
-
 namespace SimpleJSON.Editor
 {
     public static class SaveManagerWindow
