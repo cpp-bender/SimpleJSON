@@ -23,6 +23,8 @@ namespace SimpleJSON.Editor
         {
             if (Directory.Exists(SaveManager.BASEDIRECTORY))
             {
+                DeleteSaveFiles();
+
                 Directory.Delete(SaveManager.BASEDIRECTORY);
 
                 new DeleteSaveDirectoryLog();
