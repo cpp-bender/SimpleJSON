@@ -41,6 +41,8 @@ namespace SimpleJSON
 
         public static T Load<T>(string path) where T : class
         {
+            CreateSaveDir();
+
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -52,6 +54,8 @@ namespace SimpleJSON
 
         public static T[] Load<T>(string path, bool empty = false) where T : class
         {
+            CreateSaveDir();
+
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -63,8 +67,6 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T obj = default(T)) where T : class
         {
-            //TODO: Test this
-
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(obj);
@@ -78,8 +80,6 @@ namespace SimpleJSON
 
         public static void Reset<T>(string path, T[] objs = default(T[])) where T : class
         {
-            //TODO: Test this
-
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(new Wrapper<T>(objs));
