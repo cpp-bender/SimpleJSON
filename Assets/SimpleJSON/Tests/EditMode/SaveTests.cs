@@ -66,7 +66,6 @@ public class PlayerSaveData
         this.health = health;
         this.name = name;
     }
-
 }
 
 [Serializable]
