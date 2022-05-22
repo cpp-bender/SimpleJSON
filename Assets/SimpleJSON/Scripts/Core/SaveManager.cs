@@ -41,10 +41,6 @@ namespace SimpleJSON
 
         public static T Load<T>(string path) where T : class
         {
-            //TODO: Test this
-
-            CreateSaveDir();
-
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -56,10 +52,6 @@ namespace SimpleJSON
 
         public static T[] Load<T>(string path, bool empty = false) where T : class
         {
-            //TODO: Test this
-
-            CreateSaveDir();
-
             string fullPath = GetPath(path);
 
             string json = ReadFile(fullPath);
@@ -104,6 +96,7 @@ namespace SimpleJSON
             if (!Directory.Exists(BASEDIRECTORY))
             {
                 Directory.CreateDirectory(BASEDIRECTORY);
+                new CreateSaveDirectoryLog();
             }
         }
 
@@ -119,14 +112,7 @@ namespace SimpleJSON
 
         private static string GetPath(string fileName)
         {
-            string fullPath = BASEDIRECTORY + fileName;
-
-            if (!File.Exists(fullPath))
-            {
-                File.Create(fullPath);
-            }
-
-            return fullPath;
+            return BASEDIRECTORY + fileName;
         }
 
         private static string ReadFile(string path)

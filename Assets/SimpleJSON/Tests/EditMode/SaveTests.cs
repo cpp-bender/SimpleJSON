@@ -10,7 +10,7 @@ public class SaveTests
     {
         var playerSaveData = new PlayerSaveData(100, "Player");
 
-        SaveManager.Save(playerSaveData, PlayerSaveData.Path);
+        SaveManager.Save(playerSaveData, PlayerSaveData.File);
     }
 
     [Test]
@@ -18,7 +18,7 @@ public class SaveTests
     {
         var playerSaveData = new PlayerSaveData(500, "New Player");
 
-        SaveManager.Save(playerSaveData, "/OtherSave.json");
+        SaveManager.Save(playerSaveData, "OtherSave.json");
     }
 
     [Test]
@@ -55,8 +55,8 @@ public class SaveTests
 [Serializable]
 public class PlayerSaveData
 {
-    private static string path = "PlayerData.json";
-    public static string Path { get => path; }
+    private static string file = "PlayerData.json";
+    public static string File { get => file; }
 
     public int health;
     public string name;

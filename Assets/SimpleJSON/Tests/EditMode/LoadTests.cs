@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using SimpleJSON.Util;
 using SimpleJSON;
 using System;
 
@@ -21,7 +20,7 @@ public class LoadTests
             new TruckData(300,.3f,"Truck3"),
         };
 
-        SaveManager.Save(trucks, TruckData.Path);
+        //SaveManager.Save(trucks, TruckData.Path);
 
         var result = SaveManager.Load<TruckData>(TruckData.Path);
     }
