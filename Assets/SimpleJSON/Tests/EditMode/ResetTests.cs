@@ -7,8 +7,8 @@ public class ResetTests
     [Test]
     public void Reset()
     {
-        SaveManager.Reset(PlayerSaveData.File, new PlayerSaveData(1000, "Ahmet"));
-        SaveManager.Reset(PlayerSaveData.File, new PlayerSaveData(10, "Mehmet"));
+        SaveManager.Reset(new PlayerSaveData(1000, "Ahmet"), PlayerSaveData.File);
+        SaveManager.Reset(new PlayerSaveData(10, "Mehmet"), PlayerSaveData.File);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public class ResetTests
 
         SaveManager.Save(enemies, EnemyData.File);
 
-        SaveManager.Reset(EnemyData.File, newEnemies);
+        SaveManager.Reset(newEnemies, EnemyData.File);
     }
 }
 

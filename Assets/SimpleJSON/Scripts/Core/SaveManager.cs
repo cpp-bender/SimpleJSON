@@ -65,7 +65,7 @@ namespace SimpleJSON
             return JsonUtility.FromJson<Wrapper<T>>(json).Items;
         }
 
-        public static void Reset<T>(string path, T obj = default(T)) where T : class
+        public static void Reset<T>(T obj, string path) where T : class
         {
             CreateSaveDir();
 
@@ -78,7 +78,7 @@ namespace SimpleJSON
             new ResetLog();
         }
 
-        public static void Reset<T>(string path, T[] objs = default(T[])) where T : class
+        public static void Reset<T>(T[] objs, string path) where T : class
         {
             CreateSaveDir();
 
