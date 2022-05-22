@@ -7,6 +7,10 @@ namespace SimpleJSON
 {
     public static class SaveManager
     {
+        private static string baseDirectory = Application.persistentDataPath + "/Saves/";
+
+        public static string BASEDIRECTORY { get => baseDirectory; set => baseDirectory = value; }
+
         public static void Save<T>(T obj, string path, bool prettyPrint = true) where T : class
         {
             CreateSaveDir();
@@ -97,9 +101,9 @@ namespace SimpleJSON
 
         private static void CreateSaveDir()
         {
-            if (!Directory.Exists(SimplePath.BASEPATH))
+            if (!Directory.Exists(BASEDIRECTORY))
             {
-                Directory.CreateDirectory(SimplePath.BASEPATH);
+                Directory.CreateDirectory(BASEDIRECTORY);
             }
         }
 
@@ -137,7 +141,7 @@ namespace SimpleJSON
         {
             //TODO: Refactor
 
-            string fullPath = SimplePath.BASEPATH + "/" + fileName;
+            string fullPath = BASEDIRECTORY + fileName;
 
             if (!File.Exists(fullPath))
             {

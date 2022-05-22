@@ -1,4 +1,3 @@
-using SimpleJSON.Util;
 using SimpleJSON.Log;
 using UnityEditor;
 using System.IO;
@@ -10,16 +9,16 @@ namespace SimpleJSON.Editor
         [MenuItem("Window/SimpleJSON/Create Save Directory", false, 300)]
         public static void CreateSaveDir()
         {
-            if (!Directory.Exists(SimplePath.BASEPATH))
+            if (!Directory.Exists(SaveManager.BASEDIRECTORY))
             {
-                Directory.CreateDirectory(SimplePath.BASEPATH);
+                Directory.CreateDirectory(SaveManager.BASEDIRECTORY);
             }
         }
 
         [MenuItem("Window/SimpleJSON/Delete All Saves", false, 200)]
         public static int DeleteAll()
         {
-            var paths = Directory.GetFiles(SimplePath.BASEPATH);
+            var paths = Directory.GetFiles(SaveManager.BASEDIRECTORY);
 
             int fileCount = 0;
 
@@ -38,9 +37,9 @@ namespace SimpleJSON.Editor
         [MenuItem("Window/SimpleJSON/Delete Save Directory", false, 100)]
         public static void DeleteSaveDir()
         {
-            if (Directory.Exists(SimplePath.BASEPATH))
+            if (Directory.Exists(SaveManager.BASEDIRECTORY))
             {
-                Directory.Delete(SimplePath.BASEPATH);
+                Directory.Delete(SaveManager.BASEDIRECTORY);
             }
         }
     }

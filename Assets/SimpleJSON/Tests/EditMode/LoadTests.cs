@@ -21,9 +21,9 @@ public class LoadTests
             new TruckData(300,.3f,"Truck3"),
         };
 
-        SaveManager.Save(trucks, SimplePath.GAMESAVEPATH);
+        SaveManager.Save(trucks, TruckData.Path);
 
-        var result = SaveManager.Load<TruckData>(SimplePath.GAMESAVEPATH);
+        var result = SaveManager.Load<TruckData>(TruckData.Path);
     }
 }
 
@@ -31,6 +31,9 @@ public class LoadTests
 [Serializable]
 public class TruckData
 {
+    private static string path = "Truck.json";
+    public static string Path { get => path; }
+
     public int intField;
     public float floatField;
     public string stringField;
@@ -41,4 +44,5 @@ public class TruckData
         this.floatField = floatField;
         this.stringField = stringField;
     }
+
 }
