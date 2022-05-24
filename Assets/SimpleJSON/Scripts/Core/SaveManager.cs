@@ -9,22 +9,20 @@ namespace SimpleJSON
     {
         private static string baseDirectory = Application.persistentDataPath + "/Saves/";
 
-        public static string BASEDIRECTORY { get => baseDirectory; set => baseDirectory = value; }
+        public static string BASEDIRECTORY { get => baseDirectory; private set => baseDirectory = value; }
 
-        public static void Save<T>(T obj, string path, bool prettyPrint = true) where T : class
+        public static void Save<T>(T obj, string fileName, bool prettyPrint = true) where T : class
         {
             CreateSaveDir();
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
 
             string json = JsonUtility.ToJson(obj, prettyPrint);
 
             WriteFile(fullPath, json);
-
-            new SaveSuccessLog();
         }
 
-        public static void Save<T>(T[] objs, string path, bool prettyPrint = true) where T : class
+        public static void Save<T>(T[] objs, string fileName, bool prettyPrint = true) where T : class
         {
             CreateSaveDir();
 
@@ -32,63 +30,67 @@ namespace SimpleJSON
 
             string json = JsonUtility.ToJson(wrapper, prettyPrint);
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
 
             WriteFile(fullPath, json);
-
-            new SaveSuccessLog();
         }
 
-        public static T Load<T>(string path) where T : class
+        public static T Load<T>(string fileName) where T : class
         {
             CreateSaveDir();
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
+
+            if (!File.Exists(fullPath))
+            {
+                new JsonNotFoundLog<T>();
+
+                Save(typeof(T), fileName);
+            }
 
             string json = ReadFile(fullPath);
-
-            new LoadSuccessLog();
 
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static T[] LoadMultiple<T>(string path) where T : class
+        public static T[] LoadMultiple<T>(string fileName) where T : class
         {
             CreateSaveDir();
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
+
+            if (!File.Exists(fullPath))
+            {
+                new JsonNotFoundLog<T>();
+
+                Save(typeof(T[]), fileName);
+            }
 
             string json = ReadFile(fullPath);
-
-            new LoadSuccessLog();
 
             return JsonUtility.FromJson<Wrapper<T>>(json).Items;
         }
 
-        public static void Reset<T>(T obj, string path) where T : class
+        public static void Reset<T>(T obj, string fileName) where T : class
         {
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(obj);
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
 
             WriteFile(fullPath, json);
-
-            new ResetLog();
         }
 
-        public static void Reset<T>(T[] objs, string path) where T : class
+        public static void Reset<T>(T[] objs, string fileName) where T : class
         {
             CreateSaveDir();
 
             string json = JsonUtility.ToJson(new Wrapper<T>(objs));
 
-            string fullPath = GetPath(path);
+            string fullPath = GetPath(fileName);
 
             WriteFile(fullPath, json);
-
-            new ResetLog();
         }
 
         private static void CreateSaveDir()
@@ -96,7 +98,6 @@ namespace SimpleJSON
             if (!Directory.Exists(BASEDIRECTORY))
             {
                 Directory.CreateDirectory(BASEDIRECTORY);
-                new CreateSaveDirectoryLog();
             }
         }
 
