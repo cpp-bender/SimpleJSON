@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using SimpleJSON;
-using System;
 
 public class SaveTests
 {
@@ -50,63 +49,4 @@ public class SaveTests
 
         SaveManager.Save(guns, GunData.GunsaveFile);
     }
-}
-
-[Serializable]
-public class PlayerSaveData
-{
-    private static string file = "PlayerData.json";
-    public static string File { get => file; }
-
-    public int health;
-    public string name;
-
-    public PlayerSaveData(int health, string name)
-    {
-        this.health = health;
-        this.name = name;
-    }
-}
-
-[Serializable]
-public class EnemySaveData
-{
-    private static string enemySavePath = "EnemySaveData.json";
-    public static string EnemySavePath { get => enemySavePath; }
-
-    public enum EnemyType
-    {
-        Enemy1,
-        Enemy2,
-        Enemy3,
-    };
-
-    public Dictionary<int, string> keyValuePairs;
-    public EnemyType type;
-
-
-    public EnemySaveData(Dictionary<int, string> keyValuePairs, EnemyType type)
-    {
-        this.keyValuePairs = keyValuePairs;
-        this.type = type;
-    }
-}
-
-[Serializable]
-public class GunData
-{
-    private static string gunsaveFile = "GunData.json";
-    public static string GunsaveFile { get => gunsaveFile; }
-
-    public int level;
-    public float fireRate;
-    public string name;
-
-    public GunData(int level, float fireRate, string name)
-    {
-        this.level = level;
-        this.fireRate = fireRate;
-        this.name = name;
-    }
-
 }
