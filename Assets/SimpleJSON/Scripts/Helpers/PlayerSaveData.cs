@@ -3,8 +3,6 @@ using System;
 [Serializable]
 public class PlayerSaveData : ISaveable
 {
-    public string FileName => "PlayerSaveData.json";
-
     public int level;
     public int health;
 

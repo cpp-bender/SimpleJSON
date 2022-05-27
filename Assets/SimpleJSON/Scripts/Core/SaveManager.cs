@@ -9,7 +9,7 @@ namespace SimpleJSON
     {
         private static string baseDirectory = Application.persistentDataPath + "/Saves/";
 
-        public static string BASEDIRECTORY { get => baseDirectory; private set => baseDirectory = value; }
+        public static string BASEDIRECTORY { get => baseDirectory; }
 
         public static void Save<T>(T obj, string fileName, bool prettyPrint = true) where T : ISaveable
         {
@@ -35,7 +35,7 @@ namespace SimpleJSON
             WriteFile(fullPath, json);
         }
 
-        public static T Load<T>(string fileName, T defaultObj = default(T)) where T : ISaveable
+        public static T Load<T>(T defaultObj, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -53,7 +53,7 @@ namespace SimpleJSON
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static T[] LoadMultiple<T>(string fileName, T[] defaultObjects = default(T[])) where T : ISaveable
+        public static T[] Load<T>(T[] defaultObjects, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -71,24 +71,38 @@ namespace SimpleJSON
             return JsonUtility.FromJson<Wrapper<T>>(json).Items;
         }
 
-        public static void Reset<T>(T obj, string fileName) where T : ISaveable
+        public static void Reset<T>(T saveable, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
-            string json = JsonUtility.ToJson(obj);
-
             string fullPath = GetPath(fileName);
+
+            if (!File.Exists(fullPath))
+            {
+                new FileNameIncorrectLog<T>();
+
+                return;
+            }
+
+            string json = JsonUtility.ToJson(saveable);
 
             WriteFile(fullPath, json);
         }
 
-        public static void Reset<T>(T[] objs, string fileName) where T : ISaveable
+        public static void Reset<T>(T[] saveables, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
-            string json = JsonUtility.ToJson(new Wrapper<T>(objs));
-
             string fullPath = GetPath(fileName);
+
+            if (!File.Exists(fullPath))
+            {
+                new FileNameIncorrectLog<T>();
+
+                return;
+            }
+
+            string json = JsonUtility.ToJson(new Wrapper<T>(saveables));
 
             WriteFile(fullPath, json);
         }

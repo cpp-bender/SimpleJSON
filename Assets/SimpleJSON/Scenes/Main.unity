@@ -155,6 +155,7 @@ MonoBehaviour:
   data:
     level: 0
     health: 0
+  datas: []
 --- !u!4 &936859523
 Transform:
   m_ObjectHideFlags: 0
