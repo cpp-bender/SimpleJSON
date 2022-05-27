@@ -11,7 +11,7 @@ namespace SimpleJSON
 
         public static string BASEDIRECTORY { get => baseDirectory; private set => baseDirectory = value; }
 
-        public static void Save<T>(T obj, string fileName, bool prettyPrint = true) where T : class
+        public static void Save<T>(T obj, string fileName, bool prettyPrint = true) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -22,7 +22,7 @@ namespace SimpleJSON
             WriteFile(fullPath, json);
         }
 
-        public static void Save<T>(T[] objs, string fileName, bool prettyPrint = true) where T : class
+        public static void Save<T>(T[] objs, string fileName, bool prettyPrint = true) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -35,7 +35,7 @@ namespace SimpleJSON
             WriteFile(fullPath, json);
         }
 
-        public static T Load<T>(string fileName) where T : class
+        public static T Load<T>(string fileName, T defaultObj = default(T)) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -45,7 +45,7 @@ namespace SimpleJSON
             {
                 new JsonNotFoundLog<T>();
 
-                Save(typeof(T), fileName);
+                Save(defaultObj, fileName);
             }
 
             string json = ReadFile(fullPath);
@@ -53,7 +53,7 @@ namespace SimpleJSON
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static T[] LoadMultiple<T>(string fileName) where T : class
+        public static T[] LoadMultiple<T>(string fileName, T[] defaultObjects = default(T[])) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -63,7 +63,7 @@ namespace SimpleJSON
             {
                 new JsonNotFoundLog<T>();
 
-                Save(typeof(T[]), fileName);
+                Save(defaultObjects, fileName);
             }
 
             string json = ReadFile(fullPath);
@@ -71,7 +71,7 @@ namespace SimpleJSON
             return JsonUtility.FromJson<Wrapper<T>>(json).Items;
         }
 
-        public static void Reset<T>(T obj, string fileName) where T : class
+        public static void Reset<T>(T obj, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
@@ -82,7 +82,7 @@ namespace SimpleJSON
             WriteFile(fullPath, json);
         }
 
-        public static void Reset<T>(T[] objs, string fileName) where T : class
+        public static void Reset<T>(T[] objs, string fileName) where T : ISaveable
         {
             CreateSaveDir();
 
