@@ -10,6 +10,6 @@ public class CreateSaveDirectoryLog : BaseLogger
 
     protected override void Log()
     {
-        Debug.Log("Save directory created");
+        Debug.LogWarning("Save directory created");
     }
 }

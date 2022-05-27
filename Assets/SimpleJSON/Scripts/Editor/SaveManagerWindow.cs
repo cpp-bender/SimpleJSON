@@ -6,7 +6,9 @@ namespace SimpleJSON.Editor
 {
     public static class SaveManagerWindow
     {
-        [MenuItem("Window/SimpleJSON/Create Save Directory", false, 100)]
+        private const string BASEMENUNAME = "Window/SimpleJSON/";
+
+        [MenuItem(BASEMENUNAME + "Create Save Directory", false, 100)]
         public static void CreateSaveDir()
         {
             if (!Directory.Exists(SaveManager.BASEDIRECTORY))
@@ -17,7 +19,7 @@ namespace SimpleJSON.Editor
             }
         }
 
-        [MenuItem("Window/SimpleJSON/Delete Save Directory", false, 200)]
+        [MenuItem(BASEMENUNAME + "Delete Save Directory", false, 200)]
         public static void DeleteSaveDir()
         {
             if (Directory.Exists(SaveManager.BASEDIRECTORY))
@@ -30,12 +32,12 @@ namespace SimpleJSON.Editor
             }
         }
 
-        [MenuItem("Window/SimpleJSON/Delete All Save Files", false, 300)]
-        public static int DeleteSaveFiles()
+        [MenuItem(BASEMENUNAME + "Delete All Save Files", false, 300)]
+        public static void DeleteSaveFiles()
         {
             if (!Directory.Exists(SaveManager.BASEDIRECTORY))
             {
-                return 0;
+                return;
             }
 
             var paths = Directory.GetFiles(SaveManager.BASEDIRECTORY);
@@ -51,10 +53,8 @@ namespace SimpleJSON.Editor
 
             if (fileCount > 0)
             {
-                new DeleteSuccessLog();
+                new DeleteSuccessLog(fileCount);
             }
-
-            return fileCount;
         }
     }
 }

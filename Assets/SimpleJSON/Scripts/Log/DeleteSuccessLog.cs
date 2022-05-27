@@ -4,14 +4,16 @@ namespace SimpleJSON.Log
 {
     public class DeleteSuccessLog : BaseLogger
     {
-        public DeleteSuccessLog() : base()
-        {
+        private int fileCount;
 
+        public DeleteSuccessLog(int fileCount) : base()
+        {
+            this.fileCount = fileCount;
         }
 
         protected override void Log()
         {
-            Debug.Log("Files deleted");
+            Debug.LogWarning($"{fileCount} files deleted");
         }
     }
 }

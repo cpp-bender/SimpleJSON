@@ -10,6 +10,6 @@ public class DeleteSaveDirectoryLog : BaseLogger
 
     protected override void Log()
     {
-        Debug.Log("Save directory deleted");
+        Debug.LogWarning("Save directory deleted");
     }
 }
