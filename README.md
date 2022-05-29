@@ -10,6 +10,7 @@
   - [Important Note](#important-note)
   - [How to save](#how-to-save)
   - [How to load](#how-to-load)
+  - [How to reset](#how-to-reset)
     
 </details>
 
@@ -195,6 +196,60 @@ public class EnemyManager : MonoBehaviour
     }
 }
 ```
+
+## How To Reset
+
+#### Example 1
+
+```csharp 
+using System.Collections.Generic;
+using UnityEngine;
+using SimpleJSON;
+
+public class PlayerController : MonoBehaviour
+{
+    public PlayerSaveData playerSaveData;
+
+    public void OnGameReset()
+    {
+        SaveManager.Reset(new PlayerSaveData().SetHealth(100).SetMoney(0), "PlayerSaveData.json");
+    }
+}
+```
+
+
+#### Example 2
+
+```csharp 
+using System.Collections.Generic;
+using UnityEngine;
+using SimpleJSON;
+
+public class EnemyManager : MonoBehaviour
+{
+    public EnemySaveData[] enemySaves;
+    public List<Enemy> enemies;
+
+
+    public void OnGameReset()
+    {
+        var defaultEnemySaves = new List<EnemySaveData>()
+        {
+            new EnemySaveData().SetHitRadius(1f).SetLevel(1).SetName("Enemy1"),
+            new EnemySaveData().SetHitRadius(1f).SetLevel(1).SetName("Enemy2"),
+            new EnemySaveData().SetHitRadius(1f).SetLevel(1).SetName("Enemy3"),
+            new EnemySaveData().SetHitRadius(1f).SetLevel(1).SetName("Enemy4"),
+            new EnemySaveData().SetHitRadius(1f).SetLevel(1).SetName("Enemy5"),
+        };
+        
+        SaveManager.Reset(defaultEnemySaves.ToArray(), "EnemySaves.json");
+    }
+}
+```
+
+
+
+
 
 
 
