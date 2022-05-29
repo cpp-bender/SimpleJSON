@@ -11,6 +11,7 @@
   - [How to save](#how-to-save)
   - [How to load](#how-to-load)
   - [How to reset](#how-to-reset)
+  - [SimpleJSON Window](#simplejson-window)
     
 </details>
 
@@ -247,10 +248,28 @@ public class EnemyManager : MonoBehaviour
 }
 ```
 
+## SimpleJSON Window
 
+ - SimpleJSON also provides a bunch of extra Window functions to reduce time.
+ - It has 4 options;
 
+1 - Create Save Directory
 
+ - Creates a directory called "Saves" relative to the  <a href="https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html">Persistent Datapath</a>
 
+2 - Delete Save Directory
+
+ - Deletes the save directory
+
+3 - Delete Save Files
+
+ - Deletes Save Files
+
+ - Carefull when using this option, it deletes all of your save files
+
+4 - View Save Files
+
+ - Opens up the save directory
 
 
 
