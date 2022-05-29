@@ -1,6 +1,9 @@
+using System.Diagnostics;
 using SimpleJSON.Log;
 using UnityEditor;
+using UnityEngine;
 using System.IO;
+
 
 namespace SimpleJSON.Editor
 {
@@ -54,6 +57,20 @@ namespace SimpleJSON.Editor
             if (fileCount > 0)
             {
                 new DeleteSuccessLog(fileCount);
+            }
+        }
+
+        [MenuItem(BASEMENUNAME + "View Save Files")]
+        public static void ViewSaveFiles()
+        {
+            if (!Directory.Exists(SaveManager.BASEDIRECTORY))
+            {
+                Process.Start(Application.persistentDataPath);
+            }
+
+            else
+            {
+                Process.Start(SaveManager.BASEDIRECTORY);
             }
         }
     }
