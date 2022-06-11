@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Diagnostics;
 using SimpleJSON.Log;
 using UnityEditor;
@@ -75,3 +76,4 @@ namespace SimpleJSON.Editor
         }
     }
 }
+#endif
